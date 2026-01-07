@@ -55,3 +55,27 @@ Guidelines:
 - Think like a solo founder building a commercial product
 
 Assume I want to implement most things myself; guide me on *what to do and in what order*.
+
+
+
+PAGES:
+routes/
+├─ +page.svelte                # Landing
+├─ plan/
+│  └─ +page.svelte             # Trip input
+├─ generate/
+│  └─ +page.svelte             # Loading / AI working
+├─ trip/
+│  └─ [tripId]/
+│     └─ +page.svelte          # Editable itinerary
+├─ share/
+│  └─ [shareId]/
+│     └─ +page.svelte          # Read-only itinerary
+├─ my-trips/
+│  └─ +page.svelte             # Saved trips
+├─ about/
+│  └─ +page.svelte
+├─ api/
+│  └─ ...
+├─ +layout.svelte
+├─ +error.svelte
