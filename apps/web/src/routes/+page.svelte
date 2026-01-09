@@ -4,23 +4,24 @@
   import { goto } from '$app/navigation';
 </script>
 
-
 <Background
-  lightSrc="/landing/bg_logo_light.jpg"
-  darkSrc="/landing/bg_logo_dark.jpg"
+  lightSrc="/landing/temp_l.jpg"
+  darkSrc="/landing/temp_d.jpg"
 />
 
 <ThemeToggle />
 
-<!-- Info Panel -->
-<section class="fixed right-16 top-1/2 -translate-y-1/2 z-10 max-w-md">
-  <!-- your text -->
-</section>
+<main class="min-h-screen flex items-center justify-center relative z-10">
+  <div class="text-center space-y-6 text-white">
+    <p class="text-lg">
+      An AI powered Travel Planner
+    </p>
 
-
-<slot />
-
-  <button on:click={() => goto('/plan')}>
-    Let’s Travel
-  </button>
-
+    <button
+      on:click={() => goto('/plan')}
+      class="px-6 py-3 rounded-lg bg-black/60 backdrop-blur"
+    >
+      Let’s Travel
+    </button>
+  </div>
+</main>
