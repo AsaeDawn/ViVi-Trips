@@ -12,11 +12,12 @@
          rounded-full p-3
          bg-black/20 dark:bg-white/20
          backdrop-blur
-         hover:scale-105 transition"
+         hover:scale-105 transition
+         border border-black"
 >
   {#if $theme === 'dark'}
-    🌙
+    🌙 Dark
   {:else}
-    ☀️
+    ☀️ Light
   {/if}
 </button>

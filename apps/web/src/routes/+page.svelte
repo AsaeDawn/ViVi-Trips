@@ -5,15 +5,15 @@
 </script>
 
 <Background
-  lightSrc="/landing/temp_l.jpg"
-  darkSrc="/landing/temp_d.jpg"
+  lightSrc="/landing/1temp_l.jpg"
+  darkSrc="/landing/1temp_d.jpg"
 />
 
 <ThemeToggle />
 
 <main class="min-h-screen flex items-center justify-center relative z-10">
-  <div class="text-center space-y-6 text-white">
-    <p class="text-lg">
+  <div class="text-center space-y-6 text-black border border-black">
+    <p class="text-lg border border-black ">
       An AI powered Travel Planner
     </p>
 

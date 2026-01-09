@@ -5,16 +5,21 @@
 </script>
 
 <Background
-  lightSrc="/landing/temp_l.jpg"
-  darkSrc="/landing/temp_d.jpg"
+  lightSrc="/landing/1temp_l.jpg"
+  darkSrc="/landing/1temp_d.jpg"
 />
 <ThemeToggle />
 
 <main>
+
+  
   <button 
     on:click={() => goto('/')}
-    class="fixed top-1/2 left-1/2 z-10 max-w-md text-white"
+    class="fixed top-1/2 left-1/2 z-10 max-w-md text-black border border-black"
   >
     back
   </button>
+
+
+
 </main>
