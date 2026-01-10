@@ -2,73 +2,88 @@
   import Background from '$lib/components/Background.svelte';
   import ThemeToggle from '$lib/components/ThemeToggle.svelte';
   import { goto } from '$app/navigation';
+
+  import TextField from '$lib/components/form/TextField.svelte';
+  import DateField from '$lib/components/form/DateField.svelte';
+  import ToggleGroup from '$lib/components/form/ToggleGroup.svelte';
+
+  const activityOptions = [
+    { value: 'food', label: '🍔 Food' },
+    { value: 'nature', label: '🌿 Nature' },
+    { value: 'culture', label: '🏛️ Culture' },
+    { value: 'shopping', label: '🛍️ Shopping' },
+    { value: 'nightlife', label: '🌃 Nightlife' }
+  ];
+
+  const budgetOptions = [
+    { value: 'low', label: '💸 Low — 50–100$' },
+    { value: 'medium', label: '💰 Medium — 150–250$' },
+    { value: 'high', label: '🤑 High — 250$+' }
+  ];
+
+  const paceOptions = [
+    { value: 'relaxed', label: '🧘 Relaxed — 1–2/day' },
+    { value: 'moderate', label: '🚶 Moderate — 3–5/day' },
+    { value: 'fast', label: '🏃 Fast — 5+/day' }
+  ];
 </script>
 
 <Background
-  lightSrc="/landing/1temp_l.jpg"
-  darkSrc="/landing/1temp_d.jpg"
+  lightSrc="/landing/candle.jpg"
+  darkSrc="/landing/temp_d.jpg"
 />
 
-
-<main>
-
-  <header class="flex space-y-6 text-black border border-black">
-    <button>Login/SignUp</button>
+<main class="relative z-10 text-white">
+  <header class="flex justify-between items-center border border-white p-4">
+    <button>Login / Sign Up</button>
     <ThemeToggle />
   </header>
 
-  <h1>Plan Your Trip</h1>
-  
-  <!--  User Travel Planning Inputs -->
+  <h1 class="text-2xl font-bold mb-6">Plan Your Trip</h1>
 
-  <section class="mb-6">
-    <label class="block mb-2 font-medium" for="destination">
-      Question 1: Where do you want to travel to?
-    </label>
-    <input id="destination" name="destination" type="text" placeholder="e.g. Paris" class="mt-2 p-2 border rounded w-full" />
-  </section>
+  <TextField
+    label="Question 1: Where do you want to travel to?"
+    id="destination"
+    name="destination"
+    placeholder="e.g. Paris"
+  />
 
-  <section class="mb-6">
-    <label class="block mb-2 font-medium" for="travel_start">
-      Question 2: When do you want to start traveling?</label>
-    <input id="travel_start" name="travel_start" type="date" class="mt-2 p-2 border rounded" />
-  </section>
+  <DateField
+    label="Question 2: When do you want to start traveling?"
+    id="travel_start"
+    name="travel_start"
+  />
 
-  <section class="mb-6">933218
-    <label class="block mb-2 font-medium" for="travel_end">
-      Question 3: Till when (end date)?</label>
-    <input id="travel_end" name="travel_end" type="date" class="mt-2 p-2 border rounded" />
-  </section>
+  <DateField
+    label="Question 3: Till when (end date)?"
+    id="travel_end"
+    name="travel_end"
+  />
 
-  <section class="mb-6">
-    <label class="block mb-2 font-medium" for="activities">
-      Question 4: What activities are you fond of?</label>
-    <input id="activities" name="activities" type="text" placeholder="e.g. hiking, museums" class="mt-2 p-2 border rounded w-full" />
-  </section>
+  <ToggleGroup
+    label="Question 4: What activities are you fond of?"
+    name="activities[]"
+    options={activityOptions}
+  />
 
-  <section class="mb-6">
-    <label class="block mb-2 font-medium" for="budget">
-      Question 5: What is your estimated budget?</label>
-    <input id="budget" name="budget" type="number" placeholder="Amount in USD" class="mt-2 p-2 border rounded" />
-  </section>
+  <ToggleGroup
+    label="Question 5: What is your estimated budget?"
+    name="budget"
+    type="radio"
+    options={budgetOptions}
+  />
 
-  <section class="mb-6">
-    <label class="block mb-2 font-medium" for="pace">
-      Question 6: Pick your travel pace</label>
-    <select id="pace" name="pace" class="mt-2 p-2 border rounded">
-      <option value="relaxed">Relaxed</option>
-      <option value="moderate">Moderate</option>
-      <option value="fast">Fast</option>
-    </select>
-  </section>
+  <ToggleGroup
+    label="Question 6: Pick your travel pace"
+    name="pace"
+    type="radio"
+    options={paceOptions}
+  />
 
-  <button 
+  <button
     on:click={() => goto('/')}
-    class="fixed top-1/2 left-1/2 z-10 max-w-md text-black border border-black"
+    class="fixed bottom-6 right-6 border border-white px-4 py-2"
   >
-    back
+    Back
   </button>
-
-
-
 </main>

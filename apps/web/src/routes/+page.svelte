@@ -5,21 +5,21 @@
 </script>
 
 <Background
-  lightSrc="/landing/1temp_l.jpg"
-  darkSrc="/landing/1temp_d.jpg"
+  lightSrc="/landing/candle.jpg"
+  darkSrc="/landing/temp_d.jpg"
 />
 
 <ThemeToggle />
 
 <main class="min-h-screen flex items-center justify-center relative z-10">
-  <div class="text-center space-y-6 text-black border border-black">
-    <p class="text-lg border border-black ">
+  <div class="text-center space-y-6 text-white border border-white">
+    <p class="text-lg border border-white ">
       An AI powered Travel Planner
     </p>
 
     <button
       on:click={() => goto('/plan')}
-      class="px-6 py-3 rounded-lg bg-black/60 backdrop-blur"
+      class="px-6 py-3 rounded-lg bg-white/60 backdrop-blur"
     >
       Let’s Travel
     </button>
