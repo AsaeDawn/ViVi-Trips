@@ -1,11 +1,26 @@
 <script lang="ts">
-  import Background from '$lib/components/Background.svelte';
   import ThemeToggle from '$lib/components/ThemeToggle.svelte';
   import { goto } from '$app/navigation';
+  import { fade } from 'svelte/transition';
 
   import TextField from '$lib/components/form/TextField.svelte';
   import DateField from '$lib/components/form/DateField.svelte';
   import ToggleGroup from '$lib/components/form/ToggleGroup.svelte';
+
+  // step control
+  let step = 0;
+
+  // form state
+  let destination = '';
+  let travelStart = '';
+  let travelEnd = '';
+  let activities: string[] = [];
+  let budget = '';
+  let pace = '';
+
+  function next() {
+    step += 1;
+  }
 
   const activityOptions = [
     { value: 'food', label: '🍔 Food' },
@@ -28,62 +43,125 @@
   ];
 </script>
 
-<Background
-  lightSrc="/landing/candle.jpg"
-  darkSrc="/landing/temp_d.jpg"
-/>
+<header class="flex justify-between items-center border border-black p-4">
+  <button>Login / Sign Up</button>
+  <ThemeToggle />
+</header>
 
-<main class="relative z-10 text-white">
-  <header class="flex justify-between items-center border border-white p-4">
-    <button>Login / Sign Up</button>
-    <ThemeToggle />
-  </header>
+<main class="min-h-screen flex items-center justify-center text-black">
+  <div class="w-full max-w-xl text-center px-4">
+    <p class="text-sm opacity-60 mb-4">
+      Question {step + 1} of 6
+    </p>
 
-  <h1 class="text-2xl font-bold mb-6">Plan Your Trip</h1>
+    <h1 class="text-2xl font-bold mb-8">Plan Your Trip</h1>
 
-  <TextField
-    label="Question 1: Where do you want to travel to?"
-    id="destination"
-    name="destination"
-    placeholder="e.g. Paris"
-  />
+    {#if step === 0}
+      <div in:fade>
+        <TextField
+          label="Where do you want to travel?"
+          placeholder="e.g. Paris"
+          bind:value={destination}
+        />
 
-  <DateField
-    label="Question 2: When do you want to start traveling?"
-    id="travel_start"
-    name="travel_start"
-  />
+        <button
+          class="mt-6 border border-black px-6 py-2"
+          disabled={!destination}
+          on:click={next}
+        >
+          Next →
+        </button>
+      </div>
+    {/if}
 
-  <DateField
-    label="Question 3: Till when (end date)?"
-    id="travel_end"
-    name="travel_end"
-  />
+    {#if step === 1}
+      <div in:fade>
+        <DateField
+          label="When do you want to start traveling?"
+          bind:value={travelStart}
+        />
 
-  <ToggleGroup
-    label="Question 4: What activities are you fond of?"
-    name="activities[]"
-    options={activityOptions}
-  />
+        <button
+          class="mt-6 border border-black px-6 py-2"
+          disabled={!travelStart}
+          on:click={next}
+        >
+          Next →
+        </button>
+      </div>
+    {/if}
 
-  <ToggleGroup
-    label="Question 5: What is your estimated budget?"
-    name="budget"
-    type="radio"
-    options={budgetOptions}
-  />
+    {#if step === 2}
+      <div in:fade>
+        <DateField
+          label="When does your trip end?"
+          bind:value={travelEnd}
+        />
 
-  <ToggleGroup
-    label="Question 6: Pick your travel pace"
-    name="pace"
-    type="radio"
-    options={paceOptions}
-  />
+        <button
+          class="mt-6 border border-black px-6 py-2"
+          disabled={!travelEnd}
+          on:click={next}
+        >
+          Next →
+        </button>
+      </div>
+    {/if}
 
-  <button
-    on:click={() => goto('/')}
-    class="fixed bottom-6 right-6 border border-white px-4 py-2"
-  >
-    Back
-  </button>
+    {#if step === 3}
+      <div in:fade>
+        <ToggleGroup
+          label="What activities do you enjoy?"
+          options={activityOptions}
+          bind:value={activities}
+        />
+
+        <button
+          class="mt-6 border border-black px-6 py-2"
+          disabled={activities.length === 0}
+          on:click={next}
+        >
+          Next →
+        </button>
+      </div>
+    {/if}
+
+    {#if step === 4}
+      <div in:fade>
+        <ToggleGroup
+          label="What is your estimated budget?"
+          type="radio"
+          options={budgetOptions}
+          bind:value={budget}
+        />
+
+        <button
+          class="mt-6 border border-black px-6 py-2"
+          disabled={!budget}
+          on:click={next}
+        >
+          Next →
+        </button>
+      </div>
+    {/if}
+
+    {#if step === 5}
+      <div in:fade>
+        <ToggleGroup
+          label="Pick your travel pace"
+          type="radio"
+          options={paceOptions}
+          bind:value={pace}
+        />
+
+        <button
+          class="mt-6 border border-black px-6 py-2"
+          disabled={!pace}
+          on:click={() => goto('/')}
+        >
+          Finish →
+        </button>
+      </div>
+    {/if}
+  </div>
 </main>

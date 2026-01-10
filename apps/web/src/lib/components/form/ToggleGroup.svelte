@@ -1,11 +1,16 @@
 <script lang="ts">
   import ToggleOption from './ToggleOption.svelte';
 
-  export let label: string;
-  export let name: string;
+  export let label: string = '';
+  export let name: string = '';
   export let type: 'checkbox' | 'radio' = 'checkbox';
-  export let options: { value: string; label: string }[];
+  export let options: { value: string; label: string }[] = [];
+
+  // IMPORTANT: initialize correctly
+  export let value: string | string[] =
+    type === 'radio' ? '' : [];
 </script>
+
 
 <fieldset class="mb-6">
   <legend class="block mb-3 font-medium">
@@ -18,6 +23,7 @@
         {type}
         {name}
         value={option.value}
+        bind:group={value}
       >
         {option.label}
       </ToggleOption>
